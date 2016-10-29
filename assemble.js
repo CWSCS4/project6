@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs')
 
-if (process.argv.length !== 3) throw new Error('Incorrect syntax. Use: node assemble.js FILE[.asm]')
+if (process.argv.length !== 3) throw new Error('Incorrect syntax. Use: ./assemble.js FILE[.asm]')
 
 class LineParseState {}
 const AT_START = new LineParseState,
@@ -60,7 +60,7 @@ class AInstruction {
 		return this.value
 	}
 }
-const JLT = 1 << 2, JEQ = 1 << 1, JGT = 1
+const JLT = 1 << 2, JEQ = 1 << 1, JGT = 1 << 0
 const COMPUTE_CODES = new Map()
 	.set('0', 0b101010)
 	.set('1', 0b111111)

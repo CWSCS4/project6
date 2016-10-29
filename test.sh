@@ -4,5 +4,5 @@ for asm in $(find . -name "*.asm"); do
  	~/nand2tetris/tools/Assembler.bat $asm > /dev/null #make this .sh to run on linux
  	mv $base.hack $base-actual.hack
  	./assemble.js $asm
- 	diff --ignore-all-space $base.hack $base-actual.hack
+	diff --ignore-all-space $base-actual.hack $base.hack
 done
