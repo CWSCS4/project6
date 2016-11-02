@@ -123,6 +123,8 @@ class CInstruction {
 				return JLT | JEQ
 			case 'JMP':
 				return JLT | JEQ | JGT
+			default:
+				throw new Error('Unknown jump expression: ' + this.jmpExpression)
 		}
 	}
 	toUint16() {
@@ -213,7 +215,7 @@ getLines(inStream, line => {
 					parseState = JMP_CODE
 					jmpExpression = ''
 				}
-				else expression += char
+				else expression += char //treat A+D or M=A+D as a single expression
 				break
 			}
 			case JMP_CODE: {
@@ -222,7 +224,7 @@ getLines(inStream, line => {
 		}
 	}
 	switch (parseState) {
-		case AT_START: {
+		case AT_START: { //blank line
 			break
 		}
 		case CONSTANT: {
