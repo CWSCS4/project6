@@ -1,6 +1,6 @@
 #!/bin/bash
 rm $(find . -name "*.hack")
-for asm in $(find * -name "*.asm"); do
+for asm in */*.asm; do
 	base=${asm/.asm/}
 	echo "Testing $base"
 	./assemble.js $base

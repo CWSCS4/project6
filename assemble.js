@@ -83,6 +83,7 @@ const COMPUTE_CODES = new Map()
 	.set('A&D', 0b000000)
 	.set('D|A', 0b010101)
 	.set('A|D', 0b010101)
+const VALID_DESTINATIONS = new Set(['A', 'M', 'D'])
 class CInstruction {
 	constructor({expression, jmpExpression}) {
 		const equalIndex = expression.indexOf('=')
@@ -96,7 +97,10 @@ class CInstruction {
 			computation = expression.substring(equalIndex + 1)
 		}
 		this.destinations = new Set
-		for (const destination of destinations) this.destinations.add(destination)
+		for (const destination of destinations) {
+			if (!VALID_DESTINATIONS.has(destination)) throw new Error('Unknown destination "' + destination + '" in "' + expression + '"')
+			this.destinations.add(destination)
+		}
 		this.computation = computation
 		this.jmpExpression = jmpExpression
 	}
